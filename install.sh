@@ -100,8 +100,8 @@ fi
 # Fallback to GitHub
 if [ "$download_success" = false ]; then
     echo -e "${YELLOW}→ CDN failed, trying GitHub...${NC}"
-    if curl -sL --connect-timeout 30 -o "$TEMP_FILE" "$DOWNLOAD_URL" 2>/dev/null; then
-        if [ -s "$TEMP_FILE" ] && file "$TEMP_FILE" | grep -q "gzip"; then
+    if curl -L --connect-timeout 30 -o "$TEMP_FILE" "$DOWNLOAD_URL" 2>/dev/null; then
+        if [ -s "$TEMP_FILE" ]; then
             echo -e "${GREEN}Downloaded from GitHub${NC}"
             download_success=true
         fi
