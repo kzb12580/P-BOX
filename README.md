@@ -54,17 +54,27 @@ Traffic trend charts, upload/download statistics, and traffic classification.
 
 ## 🚀 快速开始
 
-### Linux 一键安装（推荐）
+### Linux 手动部署（推荐）
+
+由于Release版本尚未创建，推荐使用手动部署脚本：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/kzb12580/P-BOX/main/deploy-manual.sh | sudo bash
+```
+
+脚本将自动：
+- 安装Go、Node.js等依赖
+- 克隆P-BOX源代码
+- 编译后端Go程序
+- 构建前端React应用
+- 创建systemd服务
+- 在端口 **8383** 启动P-BOX
+
+### 一键安装（待Release发布后可用）
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/kzb12580/P-BOX/main/install.sh | sudo bash
 ```
-
-脚本将自动：
-- 检测系统架构（amd64/arm64）
-- 下载最新稳定版本
-- 安装到 `/etc/p-box`
-- 在端口 **8383** 启动P-BOX
 
 ### 手动安装
 
