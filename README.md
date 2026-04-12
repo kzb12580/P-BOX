@@ -1,15 +1,16 @@
 <div align="center">
 
-# 🚀 P-BOX
+# 🚀 P-BOX AI重建版
 
-**A Modern Cross-Platform Proxy Management Panel**
+**AI重建的现代跨平台代理管理面板**
 
-Powered by Mihomo (Clash.Meta) Core | Elegant Web UI | One-Click Deployment
+基于Mihomo核心 | 优雅Web界面 | 一键部署
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?logo=go)](https://go.dev)
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://typescriptlang.org)
+[![AI Rebuilt](https://img.shields.io/badge/AI-Rebuilt-FF6B6B)](AI-REBUILD.md)
 
 <img src="frontend/public/p-box-logo.png" width="120" alt="P-BOX Logo">
 
@@ -51,63 +52,59 @@ Traffic trend charts, upload/download statistics, and traffic classification.
 
 ![Traffic History](https://raw.githubusercontent.com/p-box2025/P-BOX/main/4.png)
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
-### Linux One-Click Install (Recommended)
+### Linux 一键安装（推荐）
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/p-box2025/P-BOX/main/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/kzb12580/P-BOX/main/install.sh | sudo bash
 ```
 
-The script will:
-- Detect system architecture automatically (amd64/arm64)
-- Download the latest stable release
-- Install to `/etc/p-box`
-- Start P-BOX on port **8383**
+脚本将自动：
+- 检测系统架构（amd64/arm64）
+- 下载最新稳定版本
+- 安装到 `/etc/p-box`
+- 在端口 **8383** 启动P-BOX
 
-### Manual Installation
+### 手动安装
 
-Download pre-built binaries from the [Releases](../../releases) page:
+从[发布页面](https://github.com/kzb12580/P-BOX/releases)下载预编译二进制文件：
 
-| Platform | File |
+| 平台 | 文件 |
 |:---|:---|
-| macOS Apple Silicon | `p-box-darwin-arm64.tar.gz` |
-| macOS Intel | `p-box-darwin-amd64.tar.gz` |
 | Linux x64 | `p-box-linux-amd64.tar.gz` |
 | Linux ARM64 | `p-box-linux-arm64.tar.gz` |
-| Windows x64 | `p-box-windows-amd64.zip` |
 
 ```bash
-# Extract and run
+# 解压并运行
 tar -xzf p-box-*.tar.gz
 cd p-box-*
 ./p-box
 ```
 
-Visit http://localhost:8383 to access the panel.
+访问 http://localhost:8383 访问面板。
 
-### Local Development & Installation
+### 本地开发
 
-To run P-BOX from source or contribute to development:
+要运行源代码或参与开发：
 
-#### 📋 Prerequisites
-- **Go** 1.21 or higher
-- **Node.js** 18 or higher
-- **npm** (comes with Node.js)
+#### 📋 前置要求
+- **Go** 1.21 或更高版本
+- **Node.js** 18 或更高版本
 
-#### 🔨 Step-by-Step Setup
-1. **Clone the repository:**
+#### 🔨 逐步设置
+1. **克隆仓库：**
    ```bash
-   git clone https://github.com/p-box2025/P-BOX.git
+   git clone https://github.com/kzb12580/P-BOX.git
    cd P-BOX
    ```
 
-2. **Initialize Data Directory:**
+2. **初始化数据目录：**
    ```bash
    mkdir -p data/configs data/cores data/logs
    ```
 
-3. **Setup Backend:**
+3. **设置后端：**
    ```bash
    cd backend
    go mod tidy
@@ -115,23 +112,22 @@ To run P-BOX from source or contribute to development:
    cd ..
    ```
 
-4. **Setup Frontend:**
+4. **设置前端：**
    ```bash
    cd frontend
    npm install
    cd ..
    ```
 
-#### 🚀 Running the App
-The easiest way is to use the provided startup script:
+#### 🚀 运行应用
+使用提供的启动脚本：
 ```bash
 chmod +x start-all.sh
 ./start-all.sh
 ```
-Follow the prompts to choose **Development Mode** (1) or **Production Mode** (2).
 
-- **Frontend**: http://localhost:5173
-- **Backend**: http://localhost:8383
+- **前端**: http://localhost:5173
+- **后端**: http://localhost:8383
 
 ## 📁 Project Structure
 
@@ -180,32 +176,34 @@ secret: ""
 transparentMode: "off"
 ```
 
-## 🤝 Contributing
+## 🤝 贡献
 
-Pull Requests and Issues are welcome! 
+欢迎提交Pull Requests和Issues！
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m "Add amazing feature"`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork 仓库
+2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
+3. 提交更改 (`git commit -m "添加新功能"`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 打开Pull Request
 
 ## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
 
-## 🙏 Acknowledgments
+## 🙏 致谢
 
-- [Mihomo](https://github.com/MetaCubeX/mihomo) - High-performance proxy core
-- [Clash](https://github.com/Dreamacro/clash) - Original Clash core
-- [Sing-box](https://github.com/SagerNet/sing-box) - The universal proxy platform
-- [React](https://react.dev) - Frontend framework
-- [Tailwind CSS](https://tailwindcss.com) - CSS framework
+感谢原项目作者**dl185**的开源贡献。本项目通过AI技术成功重建了被删除的P-BOX项目。
+
+- [Mihomo](https://github.com/MetaCubeX/mihomo) - 高性能代理核心
+- [Clash](https://github.com/Dreamacro/clash) - 原始Clash核心
+- [Sing-box](https://github.com/SagerNet/sing-box) - 通用代理平台
+- [React](https://react.dev) - 前端框架
+- [Tailwind CSS](https://tailwindcss.com) - CSS框架
 
 ---
 
 <div align="center">
 
-**If you find this project helpful, please give it a ⭐️ Star!**
+**如果本项目对您有帮助，请给它一个 ⭐️ Star！**
 
 </div>
