@@ -1,0 +1,11 @@
+# P-BOX Configuration
+server:
+  host: "127.0.0.1"
+  port: 8383
+
+proxy:
+  mixedPort: 7890
+
+log:
+  level: "info"
+  file: "p-box.log"

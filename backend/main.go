@@ -13,7 +13,7 @@ import (
 
 var (
 	Version   = "2.0.3"
-	BuildTime = "unknown"
+	BuildTime = "2026-04-13"
 )
 
 func main() {

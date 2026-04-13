@@ -20,6 +20,7 @@ import WireGuardPage from '@/pages/WireGuardPage'
 import LegalPage from '@/pages/LegalPage'
 import SingBoxSettingsPage from '@/pages/SingBoxSettingsPage'
 import SingBoxRulesetPage from '@/pages/SingBoxRulesetPage'
+import VPNPage from '@/pages/VPNPage'
 import { authApi } from '@/api/auth'
 
 // Auth guard component
@@ -83,6 +84,7 @@ function App() {
                 <Route path="/singbox-ruleset" element={<SingBoxRulesetPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/wireguard" element={<WireGuardPage />} />
+                <Route path="/vpn" element={<VPNPage />} />
                 <Route path="/legal" element={<LegalPage />} />
               </Routes>
             </Layout>
