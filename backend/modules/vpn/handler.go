@@ -2,18 +2,30 @@ package vpn
 
 import (
 	"net/http"
-	"p-box/backend/modules/vpn/service"
 	"github.com/gin-gonic/gin"
 )
 
 type VPNHandler struct {
-	service *service.VPNService
+	service *VPNService
 }
 
-func NewHandler(svc *service.VPNService) *VPNHandler {
+func NewHandler(svc *VPNService) *VPNHandler {
 	return &VPNHandler{
 		service: svc,
 	}
+}
+
+// RegisterRoutes 注册路由
+func (h *VPNHandler) RegisterRoutes(rg *gin.RouterGroup) {
+	// VPN状态
+	rg.GET("/status", h.GetStatus)
+	// VPN连接
+	rg.POST("/connect", h.Connect)
+	// VPN断开
+	rg.POST("/disconnect", h.Disconnect)
+	// Cloudflare Workers脚本
+	rg.GET("/cloudflare-script", h.GetCloudflareScript)
+	rg.POST("/cloudflare-script", h.UpdateCloudflareScript)
 }
 
 // GetStatus 获取VPN连接状态

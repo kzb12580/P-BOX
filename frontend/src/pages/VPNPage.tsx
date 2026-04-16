@@ -5,9 +5,7 @@ import {
   Wifi,
   WifiOff,
   Download,
-  Upload,
   Server,
-  Clock,
   Copy,
   Check,
   Play,
@@ -29,14 +27,6 @@ type VPNStatus = {
   duration: string
   upload_bytes: number
   download_bytes: number
-}
-
-type ConnectionResult = {
-  success: boolean
-  message: string
-  local_ip: string
-  remote_ip: string
-  session_id: string
 }
 
 export default function VPNPage() {

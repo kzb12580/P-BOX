@@ -34,32 +34,27 @@ export interface CloudflareScriptResponse {
 class VPNApi {
   // 获取VPN状态
   async getStatus(): Promise<{ status: VPNStatus }> {
-    const response = await api.get('/api/vpn/status')
-    return response.data
+    return await api.get<{ status: VPNStatus }>('/api/vpn/status')
   }
 
   // 建立VPN连接
   async connect(params: ConnectionRequest): Promise<ConnectionResult> {
-    const response = await api.post('/api/vpn/connect', params)
-    return response.data
+    return await api.post<ConnectionResult>('/api/vpn/connect', params)
   }
 
   // 断开VPN连接
   async disconnect(): Promise<{ message: string }> {
-    const response = await api.post('/api/vpn/disconnect')
-    return response.data
+    return await api.post<{ message: string }>('/api/vpn/disconnect')
   }
 
   // 获取Cloudflare Workers脚本
   async getCloudflareScript(): Promise<CloudflareScriptResponse> {
-    const response = await api.get('/api/vpn/cloudflare-script')
-    return response.data
+    return await api.get<CloudflareScriptResponse>('/api/vpn/cloudflare-script')
   }
 
   // 更新Cloudflare Workers脚本
   async updateCloudflareScript(script: string): Promise<{ message: string }> {
-    const response = await api.post('/api/vpn/cloudflare-script', { script })
-    return response.data
+    return await api.post<{ message: string }>('/api/vpn/cloudflare-script', { script })
   }
 }
 
