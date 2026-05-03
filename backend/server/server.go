@@ -19,8 +19,7 @@ import (
 	"p-box/backend/modules/speedtest"
 	"p-box/backend/modules/subscription"
 	"p-box/backend/modules/system"
-	"p-box/backend/modules/vpn"
-	"p-box/backend/modules/wireguard"
+	"p-box/backend/modules/docker"
 	"p-box/backend/websocket"
 )
 
@@ -191,23 +190,9 @@ func (s *Server) setupRoutes() {
 		speedtestHandler := speedtest.NewHandler()
 		speedtestHandler.RegisterRoutes(api.Group("/speedtest"))
 
-		// WireGuard 模块
-		wgService := wireguard.NewService(s.config.DataDir)
-		wgHandler := wireguard.NewHandler(wgService)
-		wgHandler.RegisterRoutes(api)
-
-		// VPN 模块
-		vpnService := vpn.NewService()
-		vpnHandler := vpn.NewHandler(vpnService)
-		vpnHandler.RegisterRoutes(api.Group("/vpn"))
-
-		// 监听 VPN 启动事件，延迟 5 秒后启动 WireGuard
-		s.proxyHandler.GetService().SetOnStartCallback(func() {
-			go func() {
-				time.Sleep(5 * time.Second)
-				wgService.AutoStartIfEnabled()
-			}()
-		})
+		// Docker 管理模块
+		dockerHandler := docker.NewHandler()
+		dockerHandler.RegisterRoutes(api.Group("/docker"))
 	}
 
 	// WebSocket 路由

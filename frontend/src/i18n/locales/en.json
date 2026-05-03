@@ -12,9 +12,9 @@
     "coreManage": "Core Manage",
     "proxySettings": "Proxy Settings",
     "singboxSettings": "Sing-Box",
-    "wireguard": "WireGuard",
     "tools": "Tools",
-    "settings": "Settings"
+    "settings": "Settings",
+    "docker": "Docker"
   },
   "common": {
     "start": "Start",
@@ -699,5 +699,27 @@
     "descGenerate": "Config Generation: Uses local path when rule files exist, otherwise uses remote URL",
     "descUpdateAll": "Click 'Update All' to download latest rule files locally",
     "loading": "Loading..."
+  },
+  "docker": {
+    "title": "Docker Management",
+    "containers": "Containers",
+    "images": "Images",
+    "systemInfo": "System Info",
+    "pullImage": "Pull Image",
+    "pullImagePlaceholder": "e.g. nginx:latest",
+    "running": "Running",
+    "stopped": "Stopped",
+    "start": "Start",
+    "stop": "Stop",
+    "restart": "Restart",
+    "remove": "Remove",
+    "logs": "Logs",
+    "refresh": "Refresh",
+    "noContainers": "No containers found",
+    "noImages": "No images found",
+    "containerLogs": "Container Logs",
+    "confirmRemove": "Are you sure you want to remove this?",
+    "pullSuccess": "Image pulled successfully",
+    "pullFailed": "Failed to pull image"
   }
 }

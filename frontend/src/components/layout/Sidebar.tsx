@@ -22,9 +22,8 @@ import {
   Cpu,
   Github,
   SlidersHorizontal,
-  Network,
   Send,
-  Wifi,
+  Container,
 } from 'lucide-react'
 
 // 根据核心类型动态获取主导航项
@@ -47,8 +46,7 @@ const getSystemNavItems = (activeCore: 'mihomo' | 'singbox') => [
   activeCore === 'singbox'
     ? { path: '/singbox-settings', icon: SlidersHorizontal, labelKey: 'nav.singboxSettings', color: 'purple' }
     : { path: '/proxy-settings', icon: SlidersHorizontal, labelKey: 'nav.proxySettings', color: 'indigo' },
-  { path: '/vpn', icon: Wifi, labelKey: 'nav.vpn', color: 'green' },
-  { path: '/wireguard', icon: Network, labelKey: 'nav.wireguard', color: 'cyan' },
+  { path: '/docker', icon: Container, labelKey: 'nav.docker', color: 'teal' },
   { path: '/logs', icon: FileText, labelKey: 'nav.logs', color: 'yellow' },
   { path: '/settings', icon: Settings, labelKey: 'nav.settings', color: 'rose' },
 ]

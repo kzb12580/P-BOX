@@ -12,9 +12,9 @@
     "coreManage": "核心管理",
     "proxySettings": "代理设置",
     "singboxSettings": "Sing-Box 设置",
-    "wireguard": "WireGuard",
     "tools": "工具箱",
-    "settings": "设置"
+    "settings": "设置",
+    "docker": "Docker"
   },
   "common": {
     "start": "启动",
@@ -699,5 +699,27 @@
     "descGenerate": "配置生成：本地有规则文件时使用本地路径，否则使用远程 URL",
     "descUpdateAll": "点击「全部更新」下载最新规则文件到本地",
     "loading": "加载中..."
+  },
+  "docker": {
+    "title": "Docker 管理",
+    "containers": "容器",
+    "images": "镜像",
+    "systemInfo": "系统信息",
+    "pullImage": "拉取镜像",
+    "pullImagePlaceholder": "例如 nginx:latest",
+    "running": "运行中",
+    "stopped": "已停止",
+    "start": "启动",
+    "stop": "停止",
+    "restart": "重启",
+    "remove": "删除",
+    "logs": "日志",
+    "refresh": "刷新",
+    "noContainers": "没有容器",
+    "noImages": "没有镜像",
+    "containerLogs": "容器日志",
+    "confirmRemove": "确定要删除吗？",
+    "pullSuccess": "镜像拉取成功",
+    "pullFailed": "镜像拉取失败"
   }
 }
