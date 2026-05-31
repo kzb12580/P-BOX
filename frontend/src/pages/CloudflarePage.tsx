@@ -11,7 +11,7 @@ import {
 } from 'lucide-react'
 
 // ==================== CF Accounts Tab ====================
-function AccountsTab({ selectedId, onSelect }: { selectedId: number | null; onSelect: (id: number, acc: CFAccount) => void }) {
+function AccountsTab({ selectedId, onSelect }: { selectedId: string | null; onSelect: (id: string, acc: CFAccount) => void }) {
   const { t } = useTranslation()
   const { themeStyle } = useThemeStore()
   const isApple = themeStyle === 'apple-glass'
@@ -19,10 +19,10 @@ function AccountsTab({ selectedId, onSelect }: { selectedId: number | null; onSe
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState<CFAccount | null>(null)
-  const [form, setForm] = useState({ name: '', api_token: '', account_id: '', zone_id: '', email: '', is_default: false })
+  const [form, setForm] = useState({ name: '', apiToken: '', accountId: '', zoneId: '', email: '', isDefault: false })
   const [saving, setSaving] = useState(false)
-  const [usage, setUsage] = useState<Record<number, { total_requests: number; requests_limit: number; period: string }>>({})
-  const [refreshingUsage, setRefreshingUsage] = useState<Record<number, boolean>>({})
+  const [usage, setUsage] = useState<Record<string, { requests: number; limit: number; period: string }>>({})
+  const [refreshingUsage, setRefreshingUsage] = useState<Record<string, boolean>>({})
 
   const load = async () => {
     try { setLoading(true); const r = await cloudflareApi.getAccounts(); setAccounts(Array.isArray(r) ? r : []) }
@@ -41,12 +41,12 @@ function AccountsTab({ selectedId, onSelect }: { selectedId: number | null; onSe
     catch { toast.error('刷新用量失败') } finally { setRefreshingUsage(p => ({ ...p, [id]: false })) }
   }
 
-  const openCreate = () => { setEditing(null); setForm({ name: '', api_token: '', account_id: '', zone_id: '', email: '', is_default: accounts.length === 0 }); setShowForm(true) }
-  const openEdit = (a: CFAccount) => { setEditing(a); setForm({ name: a.name, api_token: '', account_id: a.account_id, zone_id: a.zone_id || '', email: a.email || '', is_default: a.is_default }); setShowForm(true) }
+  const openCreate = () => { setEditing(null); setForm({ name: '', apiToken: '', accountId: '', zoneId: '', email: '', isDefault: accounts.length === 0 }); setShowForm(true) }
+  const openEdit = (a: CFAccount) => { setEditing(a); setForm({ name: a.name, apiToken: '', accountId: a.accountId, zoneId: a.zoneId || '', email: a.email || '', isDefault: a.isDefault }); setShowForm(true) }
 
   const save = async () => {
-    if (!form.name || !form.account_id) { toast.error('请填写必填字段'); return }
-    if (!editing && !form.api_token) { toast.error('请填写 API Token'); return }
+    if (!form.name || !form.accountId) { toast.error('请填写必填字段'); return }
+    if (!editing && !form.apiToken) { toast.error('请填写 API Token'); return }
     setSaving(true)
     try {
       if (editing) await cloudflareApi.updateAccount(editing.id, form)
@@ -74,18 +74,18 @@ function AccountsTab({ selectedId, onSelect }: { selectedId: number | null; onSe
       {loading ? <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin text-blue-500" /></div>
       : accounts.length === 0 ? <div className={cn('text-center py-8', isApple ? 'text-slate-500' : 'text-slate-400')}>暂无账号</div>
       : <div className="grid gap-4">{accounts.map(a => {
-          const u = usage[a.id]; const pct = u ? Math.min(100, u.total_requests / u.requests_limit * 100) : 0
+          const u = usage[a.id]; const pct = u ? Math.min(100, u.requests / u.limit * 100) : 0
           return (
             <div key={a.id} className={cardCls}>
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className={cn('font-medium truncate', isApple ? 'text-slate-800' : 'text-white')}>{a.name}</span>
-                    {a.is_default && <span className="text-yellow-500 text-xs">★ 默认</span>}
+                    {a.isDefault && <span className="text-yellow-500 text-xs">★ 默认</span>}
                   </div>
                   <div className={cn('text-xs mt-1 space-y-0.5', isApple ? 'text-slate-500' : 'text-slate-400')}>
-                    <div className="flex items-center gap-1"><Key className="w-3 h-3" /><span className="truncate">{a.api_token || '••••••••'}</span></div>
-                    <div className="flex items-center gap-1"><Server className="w-3 h-3" /><span className="truncate">{a.account_id}</span></div>
+                    <div className="flex items-center gap-1"><Key className="w-3 h-3" /><span className="truncate">{a.apiToken || '••••••••'}</span></div>
+                    <div className="flex items-center gap-1"><Server className="w-3 h-3" /><span className="truncate">{a.accountId}</span></div>
                     {a.email && <div className="flex items-center gap-1"><Globe className="w-3 h-3" /><span className="truncate">{a.email}</span></div>}
                   </div>
                 </div>
@@ -101,7 +101,7 @@ function AccountsTab({ selectedId, onSelect }: { selectedId: number | null; onSe
                 <div className="mt-3 pt-3 border-t border-slate-500/20">
                   <div className="flex items-center justify-between mb-1">
                     <span className={cn('text-xs', isApple ? 'text-slate-500' : 'text-slate-400')}>用量 {u.period}</span>
-                    <span className={cn('text-xs', isApple ? 'text-slate-800' : 'text-white')}>{u.total_requests.toLocaleString()} / {u.requests_limit.toLocaleString()}</span>
+                    <span className={cn('text-xs', isApple ? 'text-slate-800' : 'text-white')}>{u.requests.toLocaleString()} / {u.limit.toLocaleString()}</span>
                   </div>
                   <div className="w-full h-2 rounded-full bg-slate-700/30 overflow-hidden">
                     <div className={cn('h-full rounded-full transition-all', pct > 80 ? 'bg-red-500' : pct > 50 ? 'bg-yellow-500' : 'bg-green-500')} style={{ width: `${pct}%` }} />
@@ -121,13 +121,13 @@ function AccountsTab({ selectedId, onSelect }: { selectedId: number | null; onSe
             </div>
             <div className="space-y-4">
               <div><label className={cn('text-sm', isApple ? 'text-slate-600' : 'text-slate-400')}>名称 *</label><input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className={cn('w-full mt-1 px-3 py-2 rounded-lg border', isApple ? 'bg-white border-slate-200' : 'bg-neutral-800 border-white/10')} placeholder="My CF Account" /></div>
-              <div><label className={cn('text-sm', isApple ? 'text-slate-600' : 'text-slate-400')}>API Token *</label><input value={form.api_token} onChange={e => setForm({ ...form, api_token: e.target.value })} type="password" className={cn('w-full mt-1 px-3 py-2 rounded-lg border', isApple ? 'bg-white border-slate-200' : 'bg-neutral-800 border-white/10')} placeholder={editing ? '留空不修改' : '输入 API Token'} /></div>
-              <div><label className={cn('text-sm', isApple ? 'text-slate-600' : 'text-slate-400')}>Account ID *</label><input value={form.account_id} onChange={e => setForm({ ...form, account_id: e.target.value })} className={cn('w-full mt-1 px-3 py-2 rounded-lg border', isApple ? 'bg-white border-slate-200' : 'bg-neutral-800 border-white/10')} /></div>
-              <div><label className={cn('text-sm', isApple ? 'text-slate-600' : 'text-slate-400')}>Zone ID (可选)</label><input value={form.zone_id} onChange={e => setForm({ ...form, zone_id: e.target.value })} className={cn('w-full mt-1 px-3 py-2 rounded-lg border', isApple ? 'bg-white border-slate-200' : 'bg-neutral-800 border-white/10')} /></div>
+              <div><label className={cn('text-sm', isApple ? 'text-slate-600' : 'text-slate-400')}>API Token *</label><input value={form.apiToken} onChange={e => setForm({ ...form, apiToken: e.target.value })} type="password" className={cn('w-full mt-1 px-3 py-2 rounded-lg border', isApple ? 'bg-white border-slate-200' : 'bg-neutral-800 border-white/10')} placeholder={editing ? '留空不修改' : '输入 API Token'} /></div>
+              <div><label className={cn('text-sm', isApple ? 'text-slate-600' : 'text-slate-400')}>Account ID *</label><input value={form.accountId} onChange={e => setForm({ ...form, accountId: e.target.value })} className={cn('w-full mt-1 px-3 py-2 rounded-lg border', isApple ? 'bg-white border-slate-200' : 'bg-neutral-800 border-white/10')} /></div>
+              <div><label className={cn('text-sm', isApple ? 'text-slate-600' : 'text-slate-400')}>Zone ID (可选)</label><input value={form.zoneId} onChange={e => setForm({ ...form, zoneId: e.target.value })} className={cn('w-full mt-1 px-3 py-2 rounded-lg border', isApple ? 'bg-white border-slate-200' : 'bg-neutral-800 border-white/10')} /></div>
               <div><label className={cn('text-sm', isApple ? 'text-slate-600' : 'text-slate-400')}>Email (可选)</label><input value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className={cn('w-full mt-1 px-3 py-2 rounded-lg border', isApple ? 'bg-white border-slate-200' : 'bg-neutral-800 border-white/10')} /></div>
               <div className="flex items-center justify-between">
                 <label className={cn('text-sm', isApple ? 'text-slate-600' : 'text-slate-400')}>设为默认</label>
-                <input type="checkbox" checked={form.is_default} onChange={e => setForm({ ...form, is_default: e.target.checked })} className="w-4 h-4 rounded" />
+                <input type="checkbox" checked={form.isDefault} onChange={e => setForm({ ...form, isDefault: e.target.checked })} className="w-4 h-4 rounded" />
               </div>
             </div>
             <div className="flex gap-2 mt-6">
@@ -142,7 +142,7 @@ function AccountsTab({ selectedId, onSelect }: { selectedId: number | null; onSe
 }
 
 // ==================== Workers Tab ====================
-function WorkersTab({ cfKey }: { cfKey?: string }) {
+function WorkersTab({ accountId }: { accountId?: string }) {
   const { t } = useTranslation()
   const { themeStyle } = useThemeStore()
   const isApple = themeStyle === 'apple-glass'
@@ -167,9 +167,9 @@ function WorkersTab({ cfKey }: { cfKey?: string }) {
     try {
       setLoading(true)
       const [w, r, d] = await Promise.all([
-        cloudflareApi.getWorkers(cfKey).catch(() => []),
-        cloudflareApi.getRoutes(cfKey).catch(() => []),
-        cloudflareApi.getDomains(cfKey).catch(() => [])
+        cloudflareApi.getWorkers(accountId).catch(() => []),
+        cloudflareApi.getRoutes(accountId).catch(() => []),
+        cloudflareApi.getDomains(accountId).catch(() => [])
       ])
       setWorkers(Array.isArray(w) ? w : [])
       const routeMap: Record<string, string[]> = {}
@@ -185,7 +185,7 @@ function WorkersTab({ cfKey }: { cfKey?: string }) {
       }
     } catch { toast.error('加载 Workers 失败') } finally { setLoading(false) }
   }
-  useEffect(() => { load() }, [cfKey])
+  useEffect(() => { load() }, [accountId])
 
   const createWorker = async () => {
     if (!newName) { toast.error('请输入 Worker 名称'); return }
@@ -193,7 +193,7 @@ function WorkersTab({ cfKey }: { cfKey?: string }) {
     if ((tab === 'file' || tab === 'folder') && !files) { toast.error('请选择文件'); return }
     setSaving(true)
     try {
-      if (tab === 'code') await cloudflareApi.createWorker({ name: newName, content: newContent }, cfKey)
+      if (tab === 'code') await cloudflareApi.createWorker({ name: newName, content: newContent }, accountId)
       else await cloudflareApi.uploadWorker(newName, files!)
       toast.success('创建成功'); setShowCreate(false); load()
     } catch (e: any) { toast.error(e?.message || '创建失败') } finally { setSaving(false) }
@@ -328,7 +328,7 @@ async function handleRequest(request) {
 }
 
 // ==================== KV Tab ====================
-function KVTab({ cfKey }: { cfKey?: string }) {
+function KVTab({ accountId }: { accountId?: string }) {
   const { themeStyle } = useThemeStore()
   const isApple = themeStyle === 'apple-glass'
   const [namespaces, setNamespaces] = useState<CFKVNamespace[]>([])
@@ -344,10 +344,10 @@ function KVTab({ cfKey }: { cfKey?: string }) {
   const [showDeleteKey, setShowDeleteKey] = useState<string | null>(null)
 
   const load = async () => {
-    try { setLoading(true); const r = await cloudflareApi.getKVNamespaces(cfKey); setNamespaces(Array.isArray(r) ? r : []) }
+    try { setLoading(true); const r = await cloudflareApi.getKVNamespaces(accountId); setNamespaces(Array.isArray(r) ? r : []) }
     catch { toast.error('加载 KV 失败') } finally { setLoading(false) }
   }
-  useEffect(() => { load() }, [cfKey])
+  useEffect(() => { load() }, [accountId])
 
   const loadKeys = async (id: string) => {
     setSelected(id); setKeysLoading(true)
@@ -548,7 +548,7 @@ export default function CloudflarePage() {
   const { themeStyle } = useThemeStore()
   const isApple = themeStyle === 'apple-glass'
   const [activeTab, setActiveTab] = useState<string>('accounts')
-  const [selectedAccount, setSelectedAccount] = useState<{ id: number; acc: CFAccount } | null>(null)
+  const [selectedAccount, setSelectedAccount] = useState<{ id: string; acc: CFAccount } | null>(null)
 
   return (
     <div className="space-y-6">
@@ -576,8 +576,8 @@ export default function CloudflarePage() {
 
       {/* Tab Content */}
       {activeTab === 'accounts' && <AccountsTab selectedId={selectedAccount?.id ?? null} onSelect={(id, acc) => setSelectedAccount({ id, acc })} />}
-      {activeTab === 'workers' && <WorkersTab cfKey={selectedAccount?.acc.api_token} />}
-      {activeTab === 'kv' && <KVTab cfKey={selectedAccount?.acc.api_token} />}
+      {activeTab === 'workers' && <WorkersTab accountId={selectedAccount?.id} />}
+      {activeTab === 'kv' && <KVTab accountId={selectedAccount?.id} />}
       {activeTab === 'ech' && <ECHTab />}
       {activeTab === 'cfip' && <CFIP />}
     </div>

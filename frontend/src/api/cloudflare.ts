@@ -1,15 +1,16 @@
 import api from './client'
 
 export interface CFAccount {
-  id: number
+  id: string
   name: string
-  api_token: string
-  account_id: string
-  zone_id?: string
+  apiToken: string
+  accountId: string
+  zoneId?: string
   email?: string
-  is_default: boolean
-  created_at: string
-  updated_at: string
+  apiKey?: string
+  isDefault: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 export interface CFWorker {
@@ -26,49 +27,50 @@ export interface CFKVNamespace {
 }
 
 export interface CFUsage {
-  total_requests: number
-  requests_limit: number
+  requests: number
+  limit: number
   period: string
+  accountId: string
 }
 
 export const cloudflareApi = {
   // Accounts
   getAccounts: () => api.get<CFAccount[]>('/cloudflare/accounts'),
   createAccount: (data: Partial<CFAccount>) => api.post('/cloudflare/accounts', data),
-  updateAccount: (id: number, data: Partial<CFAccount>) => api.put(`/cloudflare/accounts/${id}`, data),
-  deleteAccount: (id: number) => api.delete(`/cloudflare/accounts/${id}`),
-  getAccountUsage: (id: number) => api.get<CFUsage>(`/cloudflare/accounts/${id}/usage`),
-  getCachedUsage: (id: number) => api.get<CFUsage>(`/cloudflare/accounts/${id}/usage/cached`),
+  updateAccount: (id: string, data: Partial<CFAccount>) => api.put(`/cloudflare/accounts/${id}`, data),
+  deleteAccount: (id: string) => api.delete(`/cloudflare/accounts/${id}`),
+  getAccountUsage: (id: string) => api.get<CFUsage>(`/cloudflare/accounts/${id}/usage`),
+  getCachedUsage: (id: string) => api.get<CFUsage>(`/cloudflare/accounts/${id}/usage/cached`),
 
-  // Workers
-  getWorkers: (cfKey?: string) => api.get<CFWorker[]>('/cloudflare/workers', { params: cfKey ? { cf_key: cfKey } : {} }),
+  // Workers - 后端用 accountId 查询参数
+  getWorkers: (accountId?: string) => api.get<CFWorker[]>('/cloudflare/workers', { params: accountId ? { accountId } : {} }),
   getWorker: (name: string) => api.get(`/cloudflare/workers/${name}`),
-  createWorker: (data: { name: string; content: string; kv_bindings?: Record<string, string> }, cfKey?: string) =>
-    api.post('/cloudflare/workers', data, { params: cfKey ? { cf_key: cfKey } : {} }),
+  createWorker: (data: { name: string; content: string; bindings?: any[] }, accountId?: string) =>
+    api.post('/cloudflare/workers', data, { params: accountId ? { accountId } : {} }),
   updateWorker: (name: string, data: { content: string }) => api.put(`/cloudflare/workers/${name}`, data),
   deleteWorker: (name: string) => api.delete(`/cloudflare/workers/${name}`),
   uploadWorker: (name: string, files: FileList) => {
     const formData = new FormData()
-    Array.from(files).forEach(f => formData.append('files', f, f.webkitRelativePath || f.name))
+    Array.from(files).forEach(f => formData.append('file', f, f.webkitRelativePath || f.name))
     return api.post(`/cloudflare/workers/${name}/upload`, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
   },
 
   // Routes
-  getRoutes: (cfKey?: string) => api.get('/cloudflare/routes', { params: cfKey ? { cf_key: cfKey } : {} }),
-  createRoute: (name: string, pattern: string) => api.post(`/cloudflare/workers/${name}/routes`, { pattern }),
+  getRoutes: (accountId?: string) => api.get('/cloudflare/routes', { params: accountId ? { accountId } : {} }),
+  createRoute: (name: string, pattern: string, zoneId?: string) => api.post(`/cloudflare/workers/${name}/routes`, { pattern, zoneId }),
   deleteRoute: (id: string) => api.delete(`/cloudflare/routes/${id}`),
 
   // Domains & Zones
-  getDomains: (cfKey?: string) => api.get('/cloudflare/domains', { params: cfKey ? { cf_key: cfKey } : {} }),
-  getZones: (cfKey?: string) => api.get('/cloudflare/zones', { params: cfKey ? { cf_key: cfKey } : {} }),
+  getDomains: (accountId?: string) => api.get('/cloudflare/domains', { params: accountId ? { accountId } : {} }),
+  getZones: (accountId?: string) => api.get('/cloudflare/zones', { params: accountId ? { accountId } : {} }),
 
   // Worker Variables
   getWorkerVariables: (name: string) => api.get(`/cloudflare/workers/${name}/variables`),
-  setWorkerVariables: (name: string, variables: Record<string, string>) =>
+  setWorkerVariables: (name: string, variables: Array<{ name: string; type: string; value: string }>) =>
     api.post(`/cloudflare/workers/${name}/variables`, { variables }),
 
   // KV Namespaces
-  getKVNamespaces: (cfKey?: string) => api.get<CFKVNamespace[]>('/cloudflare/kv/namespaces', { params: cfKey ? { cf_key: cfKey } : {} }),
+  getKVNamespaces: (accountId?: string) => api.get<CFKVNamespace[]>('/cloudflare/kv/namespaces', { params: accountId ? { accountId } : {} }),
   createKVNamespace: (title: string) => api.post('/cloudflare/kv/namespaces', { title }),
   deleteKVNamespace: (id: string) => api.delete(`/cloudflare/kv/namespaces/${id}`),
   renameKVNamespace: (id: string, title: string) => api.put(`/cloudflare/kv/namespaces/${id}`, { title }),
@@ -80,7 +82,8 @@ export const cloudflareApi = {
 
   // ECH Deployments
   getECHDeployments: () => api.get('/cloudflare/ech-deployments'),
-  createECHDeployment: (data: Record<string, string>) => api.post('/cloudflare/ech-deployments', data),
+  createECHDeployment: (data: { accountId: string; zoneId: string; domain: string; config?: string }) =>
+    api.post('/cloudflare/ech-deployments', data),
   deleteECHDeployment: (id: string) => api.delete(`/cloudflare/ech-deployments/${id}`),
 
   // Config & Sync
