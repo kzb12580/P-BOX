@@ -24,6 +24,7 @@ import {
   SlidersHorizontal,
   Send,
   Container,
+  Cloud,
 } from 'lucide-react'
 
 // 根据核心类型动态获取主导航项
@@ -47,6 +48,7 @@ const getSystemNavItems = (activeCore: 'mihomo' | 'singbox') => [
     ? { path: '/singbox-settings', icon: SlidersHorizontal, labelKey: 'nav.singboxSettings', color: 'purple' }
     : { path: '/proxy-settings', icon: SlidersHorizontal, labelKey: 'nav.proxySettings', color: 'indigo' },
   { path: '/docker', icon: Container, labelKey: 'nav.docker', color: 'teal' },
+  { path: '/cloudflare', icon: Cloud, labelKey: 'nav.cloudflare', color: 'blue' },
   { path: '/logs', icon: FileText, labelKey: 'nav.logs', color: 'yellow' },
   { path: '/settings', icon: Settings, labelKey: 'nav.settings', color: 'rose' },
 ]

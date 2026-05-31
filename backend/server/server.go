@@ -19,6 +19,7 @@ import (
 	"p-box/backend/modules/speedtest"
 	"p-box/backend/modules/subscription"
 	"p-box/backend/modules/system"
+	"p-box/backend/modules/cloudflare"
 	"p-box/backend/modules/docker"
 	"p-box/backend/websocket"
 )
@@ -193,6 +194,10 @@ func (s *Server) setupRoutes() {
 		// Docker 管理模块
 		dockerHandler := docker.NewHandler()
 		dockerHandler.RegisterRoutes(api.Group("/docker"))
+
+		// Cloudflare 模块
+		cfHandler := cloudflare.NewHandler(s.config.DataDir)
+		cfHandler.RegisterRoutes(api.Group("/cloudflare"))
 	}
 
 	// WebSocket 路由

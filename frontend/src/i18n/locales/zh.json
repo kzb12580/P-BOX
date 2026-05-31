@@ -14,7 +14,8 @@
     "singboxSettings": "Sing-Box 设置",
     "tools": "工具箱",
     "settings": "设置",
-    "docker": "Docker"
+    "docker": "Docker",
+    "cloudflare": "Cloudflare"
   },
   "common": {
     "start": "启动",
@@ -721,5 +722,41 @@
     "confirmRemove": "确定要删除吗？",
     "pullSuccess": "镜像拉取成功",
     "pullFailed": "镜像拉取失败"
+  },
+  "cloudflare": {
+    "title": "Cloudflare 管理",
+    "workersManage": "Workers 管理",
+    "workersManageDesc": "管理 Cloudflare Workers",
+    "createWorker": "创建 Worker",
+    "editWorker": "编辑 Worker",
+    "deleteWorker": "删除 Worker",
+    "workerName": "Worker 名称",
+    "workerCode": "Worker 代码",
+    "noWorkers": "暂无 Workers",
+    "sync": "同步",
+    "kvNamespaces": "KV 命名空间",
+    "manageKVNamespaces": "管理 KV 存储",
+    "createNamespace": "创建命名空间",
+    "deleteNamespace": "删除命名空间",
+    "renameNamespace": "重命名命名空间",
+    "noNamespaces": "暂无命名空间",
+    "keyValueManagement": "键值管理",
+    "keyValueDetails": "键值详情",
+    "echDeployments": "ECH 部署",
+    "cfIP优选": "CF IP 优选",
+    "accounts": {
+      "title": "CF 账号管理",
+      "add": "添加账号",
+      "empty": "暂无账号",
+      "usage": "用量"
+    },
+    "pleaseEnterWorkerName": "请输入 Worker 名称",
+    "pleaseEnterWorkerCode": "请输入 Worker 代码",
+    "pleaseSelectFiles": "请选择文件",
+    "confirmDeleteWorker": "确定删除 Worker {name}？",
+    "confirmDeleteNamespace": "确定删除此命名空间？",
+    "workerCreated": "Worker 创建成功",
+    "workerUpdated": "Worker 更新成功",
+    "workerDeleted": "Worker 已删除"
   }
 }

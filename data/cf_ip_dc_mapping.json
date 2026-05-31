@@ -1,0 +1,141 @@
+{
+  "version": "1.0",
+  "update_at": "2026-01-31T03:02:37.309555+08:00",
+  "mappings": [
+    {
+      "ip_range": "108.162.192.0/18",
+      "data_center": "SIN",
+      "city": "Singapore",
+      "region": "Asia Pacific",
+      "country_code": "SG",
+      "sample_ip": "108.162.192.0",
+      "updated_at": "2026-01-31T03:02:26.3390329+08:00"
+    },
+    {
+      "ip_range": "103.21.244.0/22",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "103.21.244.0",
+      "updated_at": "2026-01-31T03:02:26.4317804+08:00"
+    },
+    {
+      "ip_range": "103.31.4.0/22",
+      "data_center": "DEN",
+      "city": "Denver",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "103.31.4.0",
+      "updated_at": "2026-01-31T03:02:26.4754661+08:00"
+    },
+    {
+      "ip_range": "104.16.0.0/13",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "104.16.0.0",
+      "updated_at": "2026-01-31T03:02:26.8826449+08:00"
+    },
+    {
+      "ip_range": "188.114.96.0/20",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "188.114.96.0",
+      "updated_at": "2026-01-31T03:02:31.5947695+08:00"
+    },
+    {
+      "ip_range": "141.101.64.0/18",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "141.101.64.0",
+      "updated_at": "2026-01-31T03:02:31.5992925+08:00"
+    },
+    {
+      "ip_range": "197.234.240.0/22",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "197.234.240.0",
+      "updated_at": "2026-01-31T03:02:31.6013131+08:00"
+    },
+    {
+      "ip_range": "103.22.200.0/22",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "103.22.200.0",
+      "updated_at": "2026-01-31T03:02:31.6013131+08:00"
+    },
+    {
+      "ip_range": "190.93.240.0/20",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "190.93.240.0",
+      "updated_at": "2026-01-31T03:02:31.6056727+08:00"
+    },
+    {
+      "ip_range": "173.245.48.0/20",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "173.245.48.0",
+      "updated_at": "2026-01-31T03:02:31.6184512+08:00"
+    },
+    {
+      "ip_range": "198.41.128.0/17",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "198.41.128.0",
+      "updated_at": "2026-01-31T03:02:31.6258922+08:00"
+    },
+    {
+      "ip_range": "162.158.0.0/15",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "162.158.0.0",
+      "updated_at": "2026-01-31T03:02:31.9393674+08:00"
+    },
+    {
+      "ip_range": "104.24.0.0/14",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "104.24.0.0",
+      "updated_at": "2026-01-31T03:02:32.1042462+08:00"
+    },
+    {
+      "ip_range": "172.64.0.0/13",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "172.64.0.0",
+      "updated_at": "2026-01-31T03:02:32.4988526+08:00"
+    },
+    {
+      "ip_range": "131.0.72.0/22",
+      "data_center": "SJC",
+      "city": "San Jose",
+      "region": "North America",
+      "country_code": "US",
+      "sample_ip": "131.0.72.0",
+      "updated_at": "2026-01-31T03:02:37.209362+08:00"
+    }
+  ]
+}

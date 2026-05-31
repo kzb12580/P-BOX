@@ -20,6 +20,7 @@ import DockerPage from '@/pages/DockerPage'
 import LegalPage from '@/pages/LegalPage'
 import SingBoxSettingsPage from '@/pages/SingBoxSettingsPage'
 import SingBoxRulesetPage from '@/pages/SingBoxRulesetPage'
+import CloudflarePage from '@/pages/CloudflarePage'
 
 import { authApi } from '@/api/auth'
 
@@ -84,6 +85,7 @@ function App() {
                 <Route path="/singbox-ruleset" element={<SingBoxRulesetPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="/docker" element={<DockerPage />} />
+                <Route path="/cloudflare" element={<CloudflarePage />} />
                 <Route path="/legal" element={<LegalPage />} />
               </Routes>
             </Layout>

@@ -14,7 +14,8 @@
     "singboxSettings": "Sing-Box",
     "tools": "Tools",
     "settings": "Settings",
-    "docker": "Docker"
+    "docker": "Docker",
+    "cloudflare": "Cloudflare"
   },
   "common": {
     "start": "Start",
@@ -721,5 +722,33 @@
     "confirmRemove": "Are you sure you want to remove this?",
     "pullSuccess": "Image pulled successfully",
     "pullFailed": "Failed to pull image"
+  },
+  "cloudflare": {
+    "title": "Cloudflare Management",
+    "workersManage": "Workers Management",
+    "workersManageDesc": "Manage Cloudflare Workers",
+    "createWorker": "Create Worker",
+    "editWorker": "Edit Worker",
+    "deleteWorker": "Delete Worker",
+    "workerName": "Worker Name",
+    "workerCode": "Worker Code",
+    "noWorkers": "No Workers",
+    "sync": "Sync",
+    "kvNamespaces": "KV Namespaces",
+    "manageKVNamespaces": "Manage KV Storage",
+    "createNamespace": "Create Namespace",
+    "deleteNamespace": "Delete Namespace",
+    "noNamespaces": "No Namespaces",
+    "keyValueManagement": "Key-Value Management",
+    "accounts": {
+      "title": "CF Accounts",
+      "add": "Add Account",
+      "empty": "No accounts"
+    },
+    "pleaseEnterWorkerName": "Please enter worker name",
+    "pleaseEnterWorkerCode": "Please enter worker code",
+    "confirmDeleteWorker": "Delete worker {name}?",
+    "workerCreated": "Worker created",
+    "workerDeleted": "Worker deleted"
   }
 }
